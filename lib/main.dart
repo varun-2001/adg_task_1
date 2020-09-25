@@ -1,3 +1,4 @@
+import 'package:adg_task_1/itemCard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,6 +21,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int _weight = 50;
+  int _age = 18;
+  int _height = 150;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,57 +45,69 @@ class _MyAppState extends State<MyApp> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white.withOpacity(0.05),
-                  ),
-                  margin: EdgeInsets.all(15),
-                  padding: EdgeInsets.all(10),
-                  child: FlatButton(
-                    onPressed: null,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.mars,
-                          size: 100,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'MALE',
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+              ItemCard(
+                iconic: FaIcon(
+                  FontAwesomeIcons.mars,
+                  color: Colors.white,
                 ),
+                text: 'MALE',
               ),
+              ItemCard(
+                iconic: FaIcon(
+                  FontAwesomeIcons.venus,
+                  color: Colors.white,
+                ),
+                text: 'FEMALE',
+              ),
+            ],
+          ),
+          Row(
+            children: [
               Expanded(
                 child: Container(
+                  margin: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white.withOpacity(0.05),
                   ),
-                  margin: EdgeInsets.all(15),
-                  padding: EdgeInsets.all(10),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      FaIcon(
-                        FontAwesomeIcons.venus,
-                        size: 100,
-                        color: Colors.white,
-                      ),
                       Text(
-                        'FEMALE',
+                        'HEIGHT',
                         style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        '$_height',
+                        style: TextStyle(
+                          fontSize: 70,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SliderTheme(
+                        child: Slider(
+                          max: 250.0,
+                          min: 120,
+                          label: _height.toString(),
+                          onChanged: (double newvalue) {
+                            setState(() {
+                              _height = newvalue.round();
+                            });
+                          },
+                          value: _height.toDouble(),
+                        ),
+                        data: SliderTheme.of(context).copyWith(
+                          inactiveTrackColor: Color(0xFF8D8E98),
+                          activeTrackColor: Colors.white,
+                          thumbColor: Color(0xFFEB1555),
+                          overlayColor: Color(0x29EB1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 30.0),
                         ),
                       ),
                     ],
@@ -99,6 +116,171 @@ class _MyAppState extends State<MyApp> {
               )
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.05),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'WEIGHT',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        '$_weight',
+                        style: TextStyle(
+                          fontSize: 70,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Material(
+                            child: IconButton(
+                              iconSize: 40,
+                              icon: FaIcon(
+                                FontAwesomeIcons.minus,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _weight--;
+                                });
+                              },
+                            ),
+                            color: Color.fromRGBO(76, 79, 94, 1),
+                            shape: CircleBorder(),
+                          ),
+                          Material(
+                            child: IconButton(
+                              iconSize: 40,
+                              icon: FaIcon(
+                                FontAwesomeIcons.plus,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _weight++;
+                                });
+                              },
+                            ),
+                            color: Color.fromRGBO(76, 79, 94, 1),
+                            shape: CircleBorder(),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.05),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'AGE',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        '$_age',
+                        style: TextStyle(
+                          fontSize: 70,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Material(
+                            child: IconButton(
+                              iconSize: 40,
+                              icon: FaIcon(
+                                FontAwesomeIcons.minus,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _age--;
+                                });
+                              },
+                              splashRadius: 40,
+                            ),
+                            color: Color.fromRGBO(76, 79, 94, 1),
+                            shape: CircleBorder(),
+                          ),
+                          Material(
+                            child: IconButton(
+                              iconSize: 40,
+                              icon: FaIcon(
+                                FontAwesomeIcons.plus,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _age++;
+                                });
+                              },
+                            ),
+                            color: Color.fromRGBO(76, 79, 94, 1),
+                            shape: CircleBorder(),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Center(
+                        child: FlatButton(
+                      child: Text(
+                        'CALCULATE',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: null,
+                    )),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(235, 21, 85, 1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
